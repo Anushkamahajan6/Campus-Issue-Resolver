@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from app.routes import complaints , admin
+from app.routes import complaints
 
 app = FastAPI(title="AI Campus Issue Reporter")
 
