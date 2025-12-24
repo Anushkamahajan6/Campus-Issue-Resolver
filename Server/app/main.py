@@ -1,5 +1,7 @@
 from fastapi import FastAPI
 from app.routes import complaints, admin
+from dotenv import load_dotenv
+load_dotenv()
 
 app = FastAPI(title="AI Campus Issue Reporter")
 

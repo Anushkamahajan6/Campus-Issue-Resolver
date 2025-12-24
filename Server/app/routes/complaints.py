@@ -11,6 +11,7 @@ from app.services.image_service import upload_image
 
 router = APIRouter()
 
+
 @router.post("/")
 def create_complaint(
     data: ComplaintCreate,
@@ -49,27 +50,38 @@ def create_complaint(
 
 
 @router.post("/{complaint_id}/image")
-def upload_complaint_image(
+async def upload_complaint_image(
     complaint_id: str,
     image: UploadFile = File(...),
     user=Depends(verify_token)
 ):
-    image_url = upload_image(image, user["uid"])
-   
-    if image_url == "STORAGE_DISABLED":
-        return {
-            "message": "Image upload temporarily disabled (billing required)"
-    }
-    db.collection("complaints").document(complaint_id).update({
-        "imageUrl": image_url
-    })
+    
+    doc = db.collection("complaints").document(complaint_id).get()
 
+    if not doc.exists:
+        return {"error": "Complaint not found"}
+
+    complaint = doc.to_dict()
+    image_bytes = await image.read()
+
+    # 🔥 Send image directly to Gemini
+    ai_result = analyze_complaint(
+    complaint_text=complaint["originalDescription"],
+    location=complaint.get("location"),
+    image_bytes=image_bytes,
+    image_mime=image.content_type  # 👈 VERY IMPORTANT
+)
+
+    db.collection("complaints").document(complaint_id).update({
+        "imageAnalysis": ai_result,
+        "hasImage": True
+    })
    
     return {
-        "message": "Image uploaded successfully",
-        "imageUrl": image_url
-    }
-    
+    "message": "Image analyzed successfully",
+    "analysis": ai_result
+}
+
     
 
 @router.get("/me")
