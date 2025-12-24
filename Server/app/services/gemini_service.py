@@ -1,54 +1,47 @@
-from google import genai
 import os
 import json
 import re
-from dotenv import load_dotenv
+from google import genai
 
-load_dotenv()
+# Initialize Gemini client
+client = genai.Client(
+    api_key=os.getenv("GEMINI_API_KEY")
+)
 
-client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
+MODEL = "gemini-1.5-flash"
 
 def extract_json(text: str):
     """
-    Safely extract JSON object from Gemini response.
+    Extract JSON object from Gemini response text.
     """
     match = re.search(r"\{.*\}", text, re.DOTALL)
     if not match:
-        raise ValueError(f"No JSON found in Gemini response: {text}")
+        raise ValueError("No JSON found in Gemini response")
     return json.loads(match.group())
 
 
-def analyze_complaint(complaint_text, location=None, has_image=False):
+def analyze_complaint(complaint_text: str, location: str | None = None):
     prompt = f"""
-You are an AI Campus Issue Resolver Assistant.
+You are an AI assistant helping a university administration system.
 
-Analyze the student complaint below and respond ONLY with valid JSON.
+Analyze the following campus complaint and return ONLY valid JSON.
 
-Student Complaint:
+Complaint:
 "{complaint_text}"
 
-Additional Context:
-- Location: {location or "Not specified"}
-- Uploaded Image: {"Yes" if has_image else "No"}
+Location:
+"{location}"
 
-Return JSON with EXACT keys:
+Return JSON with exactly these keys:
 - issue_type
-- urgency
+- urgency (LOW | MEDIUM | HIGH)
 - department
 - summary
 """
 
     response = client.models.generate_content(
-        model="gemini-2.5-flash",
+        model=MODEL,
         contents=prompt
     )
 
-    # 🔍 DEBUG (keep for now)
-    print("🔵 RAW GEMINI RESPONSE:")
-    print(response.text)
-
-    try:
-        return extract_json(response.text)
-    except Exception as e:
-        print("🔴 GEMINI PARSING ERROR")
-        raise RuntimeError(str(e))
+    return extract_json(response.text)

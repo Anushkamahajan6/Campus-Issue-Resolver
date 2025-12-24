@@ -6,6 +6,8 @@ from app.models.complaint import ComplaintCreate
 from app.core.firebase import db
 from app.core.security import verify_token
 from app.services.gemini_service import analyze_complaint
+from fastapi import UploadFile, File
+from app.services.image_service import upload_image
 
 router = APIRouter()
 
@@ -14,10 +16,6 @@ def create_complaint(
     data: ComplaintCreate,
     user=Depends(verify_token)
 ):
-    user = {
-        "uid": "test_user",
-        "email": "test@student.com"
-    }
     complaint_id = str(uuid.uuid4())
 
     # 🔥 STEP 1: Call Gemini
@@ -49,6 +47,30 @@ def create_complaint(
 
     return complaint
 
+
+@router.post("/{complaint_id}/image")
+def upload_complaint_image(
+    complaint_id: str,
+    image: UploadFile = File(...),
+    user=Depends(verify_token)
+):
+    image_url = upload_image(image, user["uid"])
+   
+    if image_url == "STORAGE_DISABLED":
+        return {
+            "message": "Image upload temporarily disabled (billing required)"
+    }
+    db.collection("complaints").document(complaint_id).update({
+        "imageUrl": image_url
+    })
+
+   
+    return {
+        "message": "Image uploaded successfully",
+        "imageUrl": image_url
+    }
+    
+    
 
 @router.get("/me")
 def get_my_complaints(user=Depends(verify_token)):
