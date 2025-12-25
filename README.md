@@ -90,20 +90,23 @@ Storage (Image Uploads)
 Multimodal AI (Text + Image)
 
 📂 Project Structure
+
+
 Campus-Issue-Resolver/
 │
-├── frontend/            # React application
+├── frontend/                # React application
 │
 ├── server/
 │   ├── app/
-│   │   ├── routes/      # API routes
-│   │   ├── models/      # Data models
-│   │   ├── core/        # Firebase & security config
-│   │   └── services/   # Gemini AI logic
+│   │   ├── routes/          # API routes
+│   │   ├── models/          # Data models
+│   │   ├── core/            # Firebase & security configuration
+│   │   └── services/        # Gemini AI logic
 │   └── main.py
 │
 ├── README.md
 └── .env
+
 
 🔑 How It Works
 
