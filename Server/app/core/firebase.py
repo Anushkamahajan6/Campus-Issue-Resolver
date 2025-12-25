@@ -8,5 +8,3 @@ if not firebase_admin._apps:
 
 db = firestore.client()
 
-# 🔴 TEMPORARILY DISABLED (no billing)
-bucket = None

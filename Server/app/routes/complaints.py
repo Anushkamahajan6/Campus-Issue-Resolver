@@ -21,7 +21,7 @@ def create_complaint(
 
     # 🔥 STEP 1: Call Gemini
     ai_result = analyze_complaint(
-        complaint_text=data.description,
+        description=data.description,
         location=data.location if hasattr(data, "location") else None
     )
 
