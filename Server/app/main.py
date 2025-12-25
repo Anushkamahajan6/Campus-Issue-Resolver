@@ -10,10 +10,7 @@ app = FastAPI(title="AI Campus Issue Reporter")
 # CORS Configuration - VERY IMPORTANT!
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173", "http://localhost:8000" ,
-        "http://127.0.0.1:5173",
-        "http://localhost:5174",        
-        "http://127.0.0.1:5174",],  
+    allow_origins=["*"],  
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
