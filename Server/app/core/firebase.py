@@ -1,10 +1,14 @@
-import firebase_admin
-from firebase_admin import credentials, firestore
+import os
+import json
+from firebase_admin import credentials, firestore, initialize_app
 
-cred = credentials.Certificate("firebase_key.json")
+# Read Firebase service account from ENV
+firebase_json = os.getenv("FIREBASE_SERVICE_ACCOUNT")
 
-if not firebase_admin._apps:
-    firebase_admin.initialize_app(cred)
+if not firebase_json:
+    raise RuntimeError("FIREBASE_SERVICE_ACCOUNT env var not set")
 
+cred = credentials.Certificate(json.loads(firebase_json))
+
+initialize_app(cred)
 db = firestore.client()
-
