@@ -1,6 +1,8 @@
 import os
 import json
 from firebase_admin import credentials, firestore, initialize_app
+from dotenv import load_dotenv
+load_dotenv()
 
 # Read Firebase service account from ENV
 firebase_json = os.getenv("FIREBASE_SERVICE_ACCOUNT")
