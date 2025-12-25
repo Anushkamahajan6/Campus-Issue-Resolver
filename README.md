@@ -50,14 +50,19 @@ Converts unstructured inputs into clean complaint records
 Flow:
 
 Student (Web / Mobile App)
+
         ↓
 Frontend (React)
+
         ↓
 Backend API (FastAPI)
+
         ↓
 Firebase (Auth + Firestore + Storage)
+
         ↓
 Gemini AI (Text + Image Analysis)
+
         ↓
 Admin Dashboard
 
