@@ -3,39 +3,47 @@
 An AI-driven campus complaint management system that allows students to report campus issues using text and images, while enabling administrators to automatically classify, prioritize, and resolve complaints efficiently using multimodal AI.
 
 🚀 Overview
+---
+
 
 Traditional campus complaint systems are:
 
-Manual
+- Manual
 
-Text-only
+- Text-only
 
-Slow and reactive
+- Slow and reactive
 
 Campus Issue Resolver modernizes this process by integrating AI + cloud technologies, making issue reporting faster, clearer, and more actionable.
 
+
+
 ✨ Key Features
-👩‍🎓 Student Side
+---
 
-🔐 Secure authentication
+**👩‍🎓 Student Side**
 
-📝📷 Complaint submission using text + images
+- 🔐 Secure authentication
 
-🧠 AI-generated structured complaint descriptions
+- 📝📷 Complaint submission using text + images
 
-📊 Complaint tracking and status updates
+- 🧠 AI-generated structured complaint descriptions
 
-🧑‍💼 Admin Side
+- 📊 Complaint tracking and status updates
 
-🗂 Automatic complaint categorization
+**🧑‍💼 Admin Side**
 
-⚡ Faster issue understanding using AI
+- 🗂 Automatic complaint categorization
 
-🔎 Centralized complaint dashboard
+- ⚡ Faster issue understanding using AI
 
-🛠 Status updates and resolution management
+- 🔎 Centralized complaint dashboard
+
+- 🛠 Status updates and resolution management
 
 🧠 AI Capabilities
+---
+
 
 Multimodal Understanding
 AI analyzes both image and text together
@@ -46,52 +54,55 @@ Automatic Issue Classification
 Structured Data Generation
 Converts unstructured inputs into clean complaint records
 
-🏗 System Architecture
+## 🏗 System Architecture
 
-Flow:
+**Flow:**
 
-Student (Web / Mobile App)
-        ↓
-Frontend (React)
-        ↓
-Backend API (FastAPI)
-        ↓
-Firebase (Auth + Firestore + Storage)
-        ↓
-Gemini AI (Text + Image Analysis)
-        ↓
+Student (Web / Mobile App) <br>
+↓ <br>
+Frontend (React) <br>
+↓ <br>
+Backend API (FastAPI) <br>
+↓ <br>
+Firebase (Auth + Firestore + Storage) <br>
+↓ <br>
+Gemini AI (Text + Image Analysis) <br>
+↓ <br>
 Admin Dashboard
 
+
 🧰 Tech Stack
-Frontend
+---
 
-⚛️ React
+**Frontend*
 
-🎨 Tailwind CSS
+- ⚛️ React
 
-Backend
+- 🎨 Tailwind CSS
 
-🐍 FastAPI
+**Backend**
 
-🔐 JWT Authentication
+- 🐍 FastAPI
 
-Cloud & AI
+- 🔐 JWT Authentication
 
-🔥 Firebase
+**Cloud & AI**
 
-Authentication
+- 🔥 Firebase
 
-Firestore (Database)
+- Authentication
 
-Storage (Image Uploads)
+- Firestore (Database)
 
-🤖 Google Gemini
+- Storage (Image Uploads)
 
-Multimodal AI (Text + Image)
+- 🤖 Google Gemini
+
+- Multimodal AI (Text + Image)
 
 📂 Project Structure
 
-
+```text
 Campus-Issue-Resolver/
 │
 ├── frontend/                # React application
@@ -107,8 +118,12 @@ Campus-Issue-Resolver/
 ├── README.md
 └── .env
 
+```
+
 
 🔑 How It Works
+---
+
 
 Student logs in using Firebase Authentication
 
@@ -131,12 +146,30 @@ Complaint is stored in Firestore
 Admin reviews and resolves the issue
 
 🆚 How Is This Different From Existing Systems?
-Traditional Systems	Campus Issue Resolver
-Text-only forms	Multimodal (Text + Image)
-Manual sorting	AI-driven classification
-Vague descriptions	Structured complaint data
-Slow response	Faster resolution
+---
+
+**Traditional Systems**
+
+* Text-only complaint forms
+
+- Manual sorting and categorization
+
+- Vague and inconsistent descriptions
+
+- Slow response and resolution
+
+**Campus Issue Resolver**
+
+- Multimodal input (Text + Image)
+
+- AI-driven classification
+
+- Structured and clear complaint data
+
+- Faster and more efficient resolution
+
 🎯 Use Cases
+---
 
 Broken infrastructure (benches, doors, lights)
 
@@ -147,6 +180,8 @@ Hostel and classroom problems
 Safety and security concerns
 
 🔮 Future Enhancements
+---
+
 
 📱 Mobile application integration
 
@@ -160,6 +195,6 @@ Safety and security concerns
 
 👩‍💻 Team & Contribution
 
-Built as a college project / hackathon solution to solve real-world campus problems using AI and cloud technologies.
+**Built as a college project / hackathon solution to solve real-world campus problems using AI and cloud technologies.**
 
-Contributions, suggestions, and improvements are welcome! 🙌
+**Contributions, suggestions, and improvements are welcome! 🙌**
