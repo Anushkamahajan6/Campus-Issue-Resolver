@@ -22,7 +22,7 @@ def analyze_complaint(
 ):
     api_key = os.getenv("GEMINI_API_KEY")
 
-    # ✅ SAFE FALLBACK
+    # SAFE FALLBACK
     if not api_key:
         return {
             "issue_type": "General",
