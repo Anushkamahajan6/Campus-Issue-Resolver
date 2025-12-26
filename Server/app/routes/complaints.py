@@ -9,7 +9,10 @@ from app.services.gemini_service import analyze_complaint
 from fastapi import UploadFile, File
 from app.services.image_service import upload_image
 
-router = APIRouter()
+router = APIRouter(
+    prefix="/api/complaints",
+    tags=["complaints"]
+    )
 
 
 @router.post("/")

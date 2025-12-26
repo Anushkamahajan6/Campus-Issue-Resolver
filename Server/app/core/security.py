@@ -1,24 +1,28 @@
 from fastapi import Depends, HTTPException, status
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from firebase_admin import auth
-from app.core import firebase
-from app.services.user_service import get_or_create_user
 
-security = HTTPBearer()  
+security = HTTPBearer()
 
-def verify_token(
-    credentials: HTTPAuthorizationCredentials = Depends(security)
-):
+def verify_token(credentials: HTTPAuthorizationCredentials = Depends(security)):
     try:
-        decoded = auth.verify_id_token(credentials.credentials)
-        user_data = get_or_create_user(decoded)
-        
-        print("DEBUG ROLE:", user_data)
-        
-        decoded["role"] = user_data["role"]
-        return decoded
+        token = credentials.credentials  # THIS strips "Bearer"
+        decoded = auth.verify_id_token(token)
+
+        email = decoded.get("email", "")
+        role = "admin" if "admin" in email else "student"
+
+        print("DEBUG ROLE:", {"email": email, "role": role})
+
+        return {
+            "email": email,
+            "role": role,
+            "uid": decoded["uid"]
+        }
+
     except Exception as e:
+        print("TOKEN ERROR:", str(e))
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
-            detail=str(e)
+            detail="Invalid or expired token"
         )

@@ -4,18 +4,21 @@ from datetime import datetime
 from app.core.firebase import db
 from app.models.complaint import ComplaintUpdate
 
-router = APIRouter()
+router = APIRouter(
+    prefix="/api/admin",
+    tags=["Admin"]
+)
 
-@router.get("/complaints")                              # Endpoint to get all complaints (admin access)
-def get_all_complaints(user=Depends(verify_token)):     
-    if user["role"] != "admin":                         
-        raise HTTPException(                            
-            status_code=status.HTTP_403_FORBIDDEN,  
+@router.get("/complaints")
+def get_all_complaints(user=Depends(verify_token)):
+    if user["role"] != "admin":
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
             detail="Admin access only"
         )
 
     results = []
-    docs = db.collection("complaints").stream()         # Fetch all complaints
+    docs = db.collection("complaints").stream()
 
     for doc in docs:
         data = doc.to_dict()
@@ -24,13 +27,13 @@ def get_all_complaints(user=Depends(verify_token)):
 
     return results
 
+
 @router.patch("/complaints/{complaint_id}")
 def update_complaint(
     complaint_id: str,
     data: ComplaintUpdate,
     user=Depends(verify_token)
 ):
-
     if user["role"] != "admin":
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
