@@ -60,7 +60,7 @@ export default function Login({ onLogin, onLogout, complaints = [], description,
             <div className="w-24 h-24 bg-white rounded-full flex items-center justify-center mx-auto mb-6 shadow-2xl">
               <Check className="text-indigo-600 w-12 h-12" strokeWidth={3} />
             </div>
-            <h2 className="text-3xl font-bold text-white">Welcome Back!</h2>
+            <h2 className="text-3xl font-bold text-white">Welcome!</h2>
             <p className="text-indigo-100 mt-2 font-medium">Redirecting to your campus dashboard...</p>
           </div>
         </div>
@@ -100,9 +100,7 @@ export default function Login({ onLogin, onLogout, complaints = [], description,
           <button 
             onClick={onLogout}
             className="group flex items-center gap-2 px-4 py-2 bg-white border border-slate-200 text-slate-600 hover:bg-red-50 hover:text-red-600 hover:border-red-100 rounded-xl transition-all shadow-sm"
-          >
-            <span className="text-sm font-semibold">Logout</span>
-            <LogOut size={18} className="group-hover:translate-x-0.5 transition-transform" />
+          > 
           </button>
         </div>
       </header>
