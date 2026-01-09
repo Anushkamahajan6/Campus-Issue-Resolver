@@ -61,6 +61,7 @@ export default function Student({ token, onLogout }) {
             className="group p-2.5 bg-slate-100 hover:bg-red-50 text-slate-500 hover:text-red-600 rounded-xl transition-all"
             title="Logout"
           >
+            <span className="text-sm font-semibold">Logout</span>
             <LogOut size={20} className="group-hover:-translate-x-0.5 transition-transform" />
             
           </button>

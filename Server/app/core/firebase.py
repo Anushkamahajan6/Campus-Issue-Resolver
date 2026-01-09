@@ -5,7 +5,6 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-# Read Firebase service account from ENV
 firebase_json = os.getenv("FIREBASE_SERVICE_ACCOUNT")
 
 if not firebase_json:
@@ -13,5 +12,5 @@ if not firebase_json:
 
 cred = credentials.Certificate(json.loads(firebase_json))
 initialize_app(cred)
-
 db = firestore.client()
+
