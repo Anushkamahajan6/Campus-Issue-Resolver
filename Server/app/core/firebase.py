@@ -1,16 +1,19 @@
 import os
 import json
 from firebase_admin import credentials, firestore, initialize_app
-from dotenv import load_dotenv
 
-load_dotenv()
 
-firebasej = os.getenv("FIREBASE_SERVICE_ACCOUNT")
+firebase_json = os.getenv("FIREBASE_SERVICE_ACCOUNT")
 
-if not firebasej:
+if not firebase_json:
     raise RuntimeError("FIREBASE_SERVICE_ACCOUNT env var not set")
 
-cred = credentials.Certificate(json.loads(firebasej))
-initialize_app(cred)
-db = firestore.client()
+cred = credentials.Certificate(json.loads(firebase_json))
 
+
+try:
+    initialize_app(cred)
+except ValueError:
+    pass
+
+db = firestore.client()
