@@ -1,4 +1,4 @@
-const BASE_URL = "http://127.0.0.1:8000";
+const BASE_URL = "campus-issue-resolver-production-d283.up.railway.app";
 
 const api = {
   createComplaint: async (token, data) => {
